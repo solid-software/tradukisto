@@ -1,0 +1,3 @@
+enum GenderType {
+  MASCULINE, FEMININE, NEUTER, NON_APPLICABLE
+}
