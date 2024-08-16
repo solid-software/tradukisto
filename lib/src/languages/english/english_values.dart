@@ -6,9 +6,8 @@ import '../plural_forms.dart';
 import 'english_plural_forms.dart';
 
 class EnglishValues implements BaseValues {
-
   @override
-   Map<int, GenderForms> baseNumbers() {
+  Map<int, GenderForms> baseNumbers() {
     return BaseNumbersBuilder.baseNumbersBuilder()
         .putString(0, "zero")
         .putString(1, "one")
@@ -51,20 +50,20 @@ class EnglishValues implements BaseValues {
   }
 
   @override
-   List<PluralForms> pluralForms() {
+  List<PluralForms> pluralForms() {
     return [
-        EnglishPluralForms(""),
-        EnglishPluralForms("thousand"),
-        EnglishPluralForms("million"),
-        EnglishPluralForms("billion"),
-        EnglishPluralForms("trillion"),
-        EnglishPluralForms("quadrillion"),
-        EnglishPluralForms("quintillion")
+      EnglishPluralForms(""),
+      EnglishPluralForms("thousand"),
+      EnglishPluralForms("million"),
+      EnglishPluralForms("billion"),
+      EnglishPluralForms("trillion"),
+      EnglishPluralForms("quadrillion"),
+      EnglishPluralForms("quintillion")
     ];
   }
 
   @override
-   String currency() {
+  String currency() {
     return "£";
   }
 

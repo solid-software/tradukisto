@@ -18,8 +18,8 @@ class Container {
 
   static _fromBaseValues(BaseValues baseValues) {
     HundredsToWordsConverter hundredsToStringConverter =
-    HundredsToWordsConverter(
-        baseValues.baseNumbers(), baseValues.twoDigitsNumberSeparator());
+        HundredsToWordsConverter(
+            baseValues.baseNumbers(), baseValues.twoDigitsNumberSeparator());
 
     NumberToWordsConverter numberToWordsConverter = NumberToWordsConverter(
         hundredsToStringConverter, baseValues.pluralForms());
@@ -31,5 +31,4 @@ class Container {
   IntegerToStringConverter getIntegerConverter() {
     return integerConverter;
   }
-
 }

@@ -3,7 +3,6 @@ import 'dart:core';
 
 import '../languages/gender_forms.dart';
 
-
 class BaseNumbersBuilder {
   final Map<int, GenderForms> _result = HashMap<int, GenderForms>();
 
