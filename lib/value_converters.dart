@@ -1,5 +1,4 @@
 import 'src/container.dart';
-import 'src/integer_to_string_converter.dart';
 
 enum ValueConverters {
   ENGLISH_INTEGER,

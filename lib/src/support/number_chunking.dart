@@ -1,5 +1,3 @@
- import 'dart:collection';
-
 class NumberChunking {
 
   static final int SPLIT_FACTOR = 1000;
