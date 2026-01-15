@@ -1,6 +1,6 @@
 name: tradukisto
 description: Convert numbers to words (text representation).
-version: 0.0.1
+version: 0.1.0
 repository: https://github.com/solid-software/tradukisto
 
 environment:

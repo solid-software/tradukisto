@@ -1,4 +1,6 @@
 import 'base_values.dart';
+import 'big_decimal_to_string_converter.dart';
+import 'converters/big_decimal_to_banking_money_converter.dart';
 import 'converters/hundreds_to_words_converter.dart';
 import 'converters/number_to_words_converter.dart';
 import 'integer_to_string_converter.dart';
@@ -15,6 +17,7 @@ class Container {
   }
 
   final IntegerToStringConverter integerConverter;
+  final BigDecimalToStringConverter bankingMoneyConverter;
 
   static _fromBaseValues(BaseValues baseValues) {
     HundredsToWordsConverter hundredsToStringConverter =
@@ -23,12 +26,21 @@ class Container {
 
     NumberToWordsConverter numberToWordsConverter = NumberToWordsConverter(
         hundredsToStringConverter, baseValues.pluralForms());
-    return Container._(numberToWordsConverter);
+
+    BigDecimalToStringConverter bigDecimalConverter =
+        BigDecimalToBankingMoneyConverter(
+            numberToWordsConverter, baseValues.getCurrency());
+
+    return Container._(numberToWordsConverter, bigDecimalConverter);
   }
 
-  Container._(this.integerConverter);
+  Container._(this.integerConverter, this.bankingMoneyConverter);
 
   IntegerToStringConverter getIntegerConverter() {
     return integerConverter;
+  }
+
+  BigDecimalToStringConverter getBankingMoneyConverter() {
+    return bankingMoneyConverter;
   }
 }

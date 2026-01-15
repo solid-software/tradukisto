@@ -1,3 +1,4 @@
+import 'currency.dart';
 import 'languages/gender_forms.dart';
 import 'languages/plural_forms.dart';
 
@@ -7,6 +8,8 @@ abstract class BaseValues {
   List<PluralForms> pluralForms();
 
   String currency();
+
+  Currency getCurrency();
 
   String twoDigitsNumberSeparator();
 }

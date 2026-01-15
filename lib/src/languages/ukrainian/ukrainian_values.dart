@@ -1,6 +1,7 @@
 import '../../support/base_numbers_builder.dart';
 
 import '../../base_values.dart';
+import '../../currency.dart';
 import '../gender_forms.dart';
 import '../gender_type.dart';
 import '../plural_forms.dart';
@@ -65,6 +66,15 @@ class UkrainianValues implements BaseValues {
   @override
   String currency() {
     return "₴";
+  }
+
+  @override
+  Currency getCurrency() {
+    return Currency(
+      symbol: "\$",
+      names: ["долар США", "долари США", "доларів США"],
+      subunitNames: ["цент", "центи", "центів"],
+    );
   }
 
   @override
