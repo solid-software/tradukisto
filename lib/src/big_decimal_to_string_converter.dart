@@ -1,5 +1,7 @@
-abstract class BigDecimalToStringConverter {
-  String asWords(double value);
+import 'package:decimal/decimal.dart';
 
-  String asWordsWithCurrency(double value, String currencySymbol);
+abstract class BigDecimalToStringConverter {
+  String asWords(Decimal value);
+
+  String asWordsWithCurrency(Decimal value, String currencySymbol);
 }

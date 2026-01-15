@@ -1,3 +1,5 @@
+import 'package:decimal/decimal.dart';
+
 import '../big_decimal_to_string_converter.dart';
 import '../currency.dart';
 import '../integer_to_string_converter.dart';
@@ -12,16 +14,17 @@ class BigDecimalToBankingMoneyConverter
   BigDecimalToBankingMoneyConverter(this.converter, this.currency);
 
   @override
-  String asWords(double value) {
+  String asWords(Decimal value) {
     return asWordsWithCurrency(value, currency.symbol);
   }
 
   @override
-  String asWordsWithCurrency(double value, String currencySymbol) {
+  String asWordsWithCurrency(Decimal value, String currencySymbol) {
     _validate(value);
 
-    int units = value.floor();
-    int subunits = ((value - units) * 100).round();
+    int units = value.toBigInt().toInt();
+    Decimal fractionalPart = value - Decimal.fromBigInt(BigInt.from(units));
+    int subunits = (fractionalPart * Decimal.fromInt(100)).toBigInt().toInt();
 
     String unitsInWords = converter.asWords(units);
     String currencyName = currency.getCurrencyName(units);
@@ -30,29 +33,21 @@ class BigDecimalToBankingMoneyConverter
     return '$unitsInWords $currencyName $subunits $subunitName';
   }
 
-  void _validate(double value) {
-    if (value < 0) {
+  void _validate(Decimal value) {
+    if (value < Decimal.zero) {
       throw ArgumentError("can't transform negative numbers for value $value");
     }
 
-    if (value >= 2147483648) {
+    if (value >= Decimal.fromInt(2147483648)) {
       throw ArgumentError(
           "can't transform numbers greater than Integer.MAX_VALUE for value $value");
     }
 
-    String valueStr = value.toStringAsFixed(10);
-    int decimalIndex = valueStr.indexOf('.');
-    if (decimalIndex != -1) {
-      int decimalPlaces = valueStr.substring(decimalIndex + 1).length;
-      while (decimalPlaces > 0 && valueStr[valueStr.length - 1] == '0') {
-        valueStr = valueStr.substring(0, valueStr.length - 1);
-        decimalPlaces--;
-      }
-
-      if (decimalPlaces > maximalDecimalPlacesCount) {
-        throw ArgumentError(
-            "can't transform more than $maximalDecimalPlacesCount decimal places for value $value");
-      }
+    // Check decimal places
+    int scale = value.scale;
+    if (scale > maximalDecimalPlacesCount) {
+      throw ArgumentError(
+          "can't transform more than $maximalDecimalPlacesCount decimal places for value $value");
     }
   }
 }

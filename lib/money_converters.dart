@@ -1,10 +1,12 @@
+import 'package:decimal/decimal.dart';
+
 import 'src/container.dart';
 
 enum MoneyConverters {
   ENGLISH_BANKING_MONEY_VALUE,
   UKRAINIAN_BANKING_MONEY_VALUE;
 
-  String asWords(double value) {
+  String asWords(Decimal value) {
     Container container;
     switch (this) {
       case ENGLISH_BANKING_MONEY_VALUE:
@@ -17,7 +19,7 @@ enum MoneyConverters {
     return container.getBankingMoneyConverter().asWords(value);
   }
 
-  String asWordsWithCurrency(double value, String currencySymbol) {
+  String asWordsWithCurrency(Decimal value, String currencySymbol) {
     Container container;
     switch (this) {
       case ENGLISH_BANKING_MONEY_VALUE:
